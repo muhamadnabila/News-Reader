@@ -9,7 +9,7 @@ const app = express()
 
 const port = process.env.PORT
 
-let database = process.env.ATLASS_PASS ? `mongodb+srv://root:${process.env.ATLASS_PASS}@cluster0-qtp0t.gcp.mongodb.net/namaDB?retryWrites=true&w=majority` : 'mongodb://localhost:27017/hacktivgit-eager-fox'
+let database = process.env.ATLASS_PASS ? `mongodb+srv://root:${process.env.ATLASS_PASS}@cluster0-qtp0t.gcp.mongodb.net/namaDB?retryWrites=true&w=majority` : 'mongodb://localhost:27017/news-reader'
   mongoose.connect(database,{ useNewUrlParser : true },function(err){
       if(err) console.log('connection error')
       else console.log('mongoose is connected')
