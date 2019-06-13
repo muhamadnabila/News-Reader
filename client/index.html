@@ -4,15 +4,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
     <script src="jquery.min.js"></script>
     <script src="axios.js"></script>
     <script src="index.js"></script>
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <meta name="google-signin-client_id" content="132166001773-nljl5umc0vmdlvodji12sfl1eqk051q7.apps.googleusercontent.com">
+    <title>News Reader</title>
 </head>
+
 <body>
+    <p>welcome</p>
+    <div class="g-signin2" data-onsuccess="onSignIn"></div>
+    <a href="#" onclick="signOut();">Sign out</a>
+
     test audio
     <input id="text-to-speech-input"/>
     <button onclick="playSpeech()" id="btn-speech"> speech </button> <br><br>
     <audio id="audio-source" controls preload="none" id="test-audio"></audio>
+
+
+    
+    <script src="./main.js"></script>
+ 
+
 </body>
 </html>
