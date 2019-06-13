@@ -1,10 +1,6 @@
 const mongoose = require('mongoose')
 
 let userSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    required: [true, `Name required.`],
-  },
   email: { 
     type: String,
     required: [true, 'Email is required.'],
@@ -19,12 +15,7 @@ let userSchema = new mongoose.Schema({
   password: {
     type: String,
     required: [true, 'Password is required.'],
-  },
-  role: String,
-  carts: [{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Item'
-  }]
+  }
 })
 
 let User = mongoose.model('User', userSchema)
