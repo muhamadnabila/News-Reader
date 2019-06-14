@@ -30,6 +30,7 @@ app.use( function(err,req,res,next) {
                res.status(404).json(err.message)
            }
        }else {
+
            res.status(404).json(err.message)
        }
    }

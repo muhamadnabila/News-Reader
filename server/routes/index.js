@@ -2,55 +2,28 @@ const route = require('express').Router()
 const { ControllerUser, ControllerTextToSpeech } = require('../controllers')
 const { authenticate } = require('../middlewares/auth')
 const news = require('../routes/newsApiRouter')
-const logingoogle = require('../routes/loginGoogle')
-const {OAuth2Client} = require('google-auth-library');
+const Axios = require('axios')
 
 route.get('/', (req, res) => {res.status(200).json({message: 'Connect'})})
 route.get('/authenticate',authenticate,(req,res)=>{ res.status(200).json({}) })
 route.post('/register', ControllerUser.create)
 route.post('/login', ControllerUser.login)
+route.post('/login/google', ControllerUser.googleLogin)
+
 route.post('/textToSpeech', ControllerTextToSpeech.textToSpeech)
 
-route.post('/logingoogle',(req,res)=> {
-    console.log ('masuk logingoogle')
-    const client = new OAuth2Client("132166001773-nljl5umc0vmdlvodji12sfl1eqk051q7.apps.googleusercontent.com");
-        
-        client.verifyIdToken({
-            idToken : req.body.id_token,
-        })
-            .then(ticket=> {
-                console.log('ticket')
-                const payload = ticket.getPayload();
-                console.log (payload)
-            })
-        .catch(err =>{
-            console.log('masuk error')
-            console.log(err)
-        });
-})
 route.use('/news', news)
 
-
-route.post('/logingoogle',(req,res)=> {
-    console.log ('masuk logingoogle')
-    const client = new OAuth2Client("132166001773-nljl5umc0vmdlvodji12sfl1eqk051q7.apps.googleusercontent.com");
-        
-        client.verifyIdToken({
-            idToken : req.body.id_token,
-        })
-            .then(ticket=> {
-                console.log('ticket')
-                const payload = ticket.getPayload();
-                console.log (payload)
-            })
-        .catch(err =>{
-            console.log('masuk error')
-            console.log(err)
-        });
+route.post('/translate',(req, res, next)=> {
+    let text = req.body.text
+    let fromLang = req.body.fromLang 
+    let toLang = req.body.toLang
+    Axios.post(`https://translate.yandex.net/api/v1.5/tr/translate?lang=${fromLang}-${toLang}&format=plain&key=${process.env.YANDEX_API_KEY}&text=${ text }`)
+    .then(({ data }) =>{
+        res.status(200).json(data)
+    })
+    .catch(next)
 })
-route.use('/news', news)
-
-
 route.use('/*', (req, res) => res.status(404).json({error: 'Not Found :('}))
 
 module.exports = route

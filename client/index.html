@@ -6,25 +6,88 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script src="jquery.min.js"></script>
     <script src="axios.js"></script>
-    <script src="index.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <meta name="google-signin-client_id" content="132166001773-nljl5umc0vmdlvodji12sfl1eqk051q7.apps.googleusercontent.com">
+    <link rel="stylesheet" href="style.css">
     <title>News Reader</title>
 </head>
 <body>
-    <p>welcome</p>
-    <div class="g-signin2" data-onsuccess="onSignIn"></div>
-    <a href="#" onclick="signOut();">Sign out</a>
 
-    test audio
-    <input id="text-to-speech-input"/>
+    <!-- <input id="text-to-speech-input"/>
     <button onclick="playSpeech()" id="btn-speech"> speech </button> <br><br>
-    <audio id="audio-source" controls preload="none" id="test-audio"></audio>
-
-
+    <audio id="audio-source" controls preload="none" id="test-audio"></audio> -->
     
-    <script src="./main.js"></script>
- 
-
+    <div id="login-page">
+        <div class="foo">
+            <span class="letter" data-letter="N">N</span>
+            <span class="letter" data-letter="E">E</span>
+            <span class="letter" data-letter="W">W</span>
+            <span class="letter" data-letter="S">S</span>
+            <span class="letter" data-letter=" "> </span>
+            <span class="letter" data-letter=" "> </span>
+            <span class="letter" data-letter=" "> </span>
+            <span class="letter" data-letter=" "> </span>
+            <span class="letter" data-letter=" "> </span>
+            <span class="letter" data-letter="R">R</span>
+            <span class="letter" data-letter="E">E</span>
+            <span class="letter" data-letter="A">A</span>
+            <span class="letter" data-letter="D">D</span>
+            <span class="letter" data-letter="E">E</span>
+            <span class="letter" data-letter="R">R</span>
+        </div>
+        <div class="container" >
+            <div class="row">
+                <div class="col-6 bg-danger" style="height: 400px">
+                    <img src="https://brunelpcclaw.files.wordpress.com/2013/03/stick_figure_reading_newspaper_500_clr_5142.gif?w=584" style="height: 450px; width: 400px">
+                </div>
+                <div class="col-6 bg-light" >
+                    <form onsubmit="login()" class="p-3">
+                        <div class="form-group">
+                            <input type="email" class="form-control" id="login-email" aria-describedby="emailHelp" placeholder="Enter email">
+                        </div>
+                        <div class="form-group">
+                            <input type="password" class="form-control" id="login-pass" placeholder="Password">
+                        </div>
+                        <label> Don't have an account? <a onclick="registerTrigger()" href="#">Register</a> </label>
+                        <button type="submit" class="btn btn-primary" style="width: 100% ">Login</button>
+                    </form>
+                    <p class="mt-3 login-line">or</p>
+                      <div class="g-signin2" data-onsuccess="onSignIn"></div>
+                        
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="register-page"> </div>
+    <div id="search-page">
+        <div class="bg">
+            <div class="row"> </div>
+            <div style="margin: 70px auto; padding:30px; width: 1000px ; background: rgba(0, 0, 0, 0.8); ">
+                <h1 style="text-align: center; color: floralwhite; font-weight: bold">GET THE LATEST NEWS</h1>
+            </div>
+            <div>
+                <div class="p-5" style="margin: 100px auto; width: 800px ; background: rgba(0, 0, 0, 0.8); ">
+                    <form onsubmit="getNews()">
+                        <div class="form-group">
+                            <input type="text" class="form-control news-title" aria-describedby="emailHelp" placeholder="Input News Title" style="height: 70px">
+                        </div>
+                    </form>
+                </div>
+                <div class="mt-2" id="loading" style="margin: 0px auto; width: 100px ;"> </div>
+            </div>
+        </div>
+    </div>
+    
+    <div id="main-page"></div>
+    <script src="./script/index.js"></script>
+    <script src="./script/error.js"></script>
+    <script src="./script/getData.js"></script>
+    <script src="./script/page.js"></script>
+    <script src="./script/sendData.js"></script>
 </body>
 </html>
