@@ -149,10 +149,10 @@ function showDetail(i) {
                     ${lang}
                     </button>
                     <div class="dropdown-menu">
-                        <a onclick="translator('${lang}','en','${title}','${content}','${author}','${publishedAt}','${urlToImage}','${url}')" class="dropdown-item " href="#">en</a>
-                        <a onclick="translator('${lang}','ru','${title}','${content}','${author}','${publishedAt}','${urlToImage}','${url}')" class="dropdown-item " href="#">ru</a>
-                        <a onclick="translator('${lang}','zh','${title}','${content}','${author}','${publishedAt}','${urlToImage}','${url}')" class="dropdown-item " href="#">zh</a>
-                        <a onclick="translator('${lang}','ja','${title}','${content}','${author}','${publishedAt}','${urlToImage}','${url}')" class="dropdown-item " href="#">ja</a>
+                        <a onclick="translator('${lang}','en', ${i})" class="dropdown-item " href="#">en</a>
+                        <a onclick="translator('${lang}','ru', ${i})" class="dropdown-item " href="#">ru</a>
+                        <a onclick="translator('${lang}','zh', ${i})" class="dropdown-item " href="#">zh</a>
+                        <a onclick="translator('${lang}','ja', ${i})" class="dropdown-item " href="#">ja</a>
                     </div>
                 &nbsp;<audio id="audio-source" controls preload="none" id="text-to-speech-audio"></audio>
                 </div>
@@ -168,7 +168,7 @@ function showDetail(i) {
     
 }
 
-function showDetailAfterTranslate(title,content,author,publishedAt,urlToImage,url) {
+function showDetailAfterTranslate(title, content, author, publishedAt, urlToImage, url, idx, toLang) {
     event.preventDefault()
     closeDetail()
     console.log('title ===',title)
@@ -177,7 +177,7 @@ function showDetailAfterTranslate(title,content,author,publishedAt,urlToImage,ur
     var lang ;
     getLanguage(title)
     .then(({ data }) =>{
-        lang = data.lang
+        lang = toLang
         $('#detail-page-after-translate').html(`
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
                 <a class="navbar-brand" href="#">News Reader</a>
@@ -207,10 +207,10 @@ function showDetailAfterTranslate(title,content,author,publishedAt,urlToImage,ur
                         ${lang}
                         </button>
                         <div class="dropdown-menu">
-                            <a onclick="translator('${lang}','en','${title}','${content}','${author}','${publishedAt}','${urlToImage}','${url}')" class="dropdown-item " href="#">en</a>
-                            <a onclick="translator('${lang}','ru','${title}','${content}','${author}','${publishedAt}','${urlToImage}','${url}')" class="dropdown-item " href="#">ru</a>
-                            <a onclick="translator('${lang}','zh','${title}','${content}','${author}','${publishedAt}','${urlToImage}','${url}')" class="dropdown-item " href="#">zh</a>
-                            <a onclick="translator('${lang}','ja','${title}','${content}','${author}','${publishedAt}','${urlToImage}','${url}')" class="dropdown-item " href="#">ja</a>
+                            <a onclick="translator('${lang}','en',${idx})" class="dropdown-item " href="#">en</a>
+                            <a onclick="translator('${lang}','ru',${idx})" class="dropdown-item " href="#">ru</a>
+                            <a onclick="translator('${lang}','zh',${idx})" class="dropdown-item " href="#">zh</a>
+                            <a onclick="translator('${lang}','ja',${idx})" class="dropdown-item " href="#">ja</a>
                         </div>
                     </div>
                     &nbsp;<audio id="audio-source" controls preload="none" id="text-to-speech-audio"></audio>
