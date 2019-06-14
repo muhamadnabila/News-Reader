@@ -6,6 +6,10 @@ let speechButton = $('#btn-speech')
 let audio = null
 var page = []
 var temp ;
+window.newsReaderAppState = {
+    currentAudioLang: 'en-us',
+    content: ''
+}
 
 $(document).ready(function () {
     initial()

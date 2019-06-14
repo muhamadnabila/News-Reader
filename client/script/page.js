@@ -107,6 +107,12 @@ function showMain(data){
 }
 function showDetail(title,description,author,content,publishedAt,url,urlToImage) {
     event.preventDefault()
+    let contentSplit = content.split('…')
+    content = contentSplit[0]
+    window.newsReaderAppState.content = content
+    let audioLang = window.newsReaderAppState.currentAudioLang
+    
+    playSpeech(content, audioLang)
     closeMain()
     var lang ;
     getLanguage(title)
@@ -203,6 +209,7 @@ function showDetailAfterTranslate(title,content,author,publishedAt,urlToImage,ur
                         <a onclick="translator('${lang}','zh','${title}','${content}','${author}','${publishedAt}','${urlToImage}','${url}')" class="dropdown-item " href="#">zh</a>
                         <a onclick="translator('${lang}','ja','${title}','${content}','${author}','${publishedAt}','${urlToImage}','${url}')" class="dropdown-item " href="#">ja</a>
                     </div>
+                    &nbsp;<audio id="audio-source" controls preload="none" id="text-to-speech-audio"></audio>
                 </div>
                     <ul class="navbar-nav mr-auto">
                     </ul>
