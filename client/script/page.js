@@ -74,20 +74,7 @@ function showMain(data){
     <div class="container p-5">
         <div id="list-news"> </div>
     </div>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light mt-4">
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <div class="btn-group dropup">
-            <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Dropup
-            </button>
-            <div class="dropdown-menu">
-                <a onclick=translator() class="dropdown-item language" href="#">id</a>
-            </div>
-        </div>
-            <ul class="navbar-nav mr-auto">
-            </ul>
-        </div>
-    </nav>
+    
     `)
     data.forEach(el =>{
         let description ;
@@ -99,6 +86,7 @@ function showMain(data){
         }else {
             description = el.description
         }
+        console.log(el)
         $('#list-news').append(`
         <div class="card mb-3" style="width: 100%; height:200px; max-height:200px">
             <div class="row no-gutters">
@@ -109,7 +97,7 @@ function showMain(data){
                 <div class="card-body">
                     <h5 class="card-title">${el.title}</h5>
                     <p class="card-text">${description}</p>
-                    <p class="card-text"><a href="${el.url}">visit link</a></p>
+                    <p onclick="showDetail('${el.title}','${el.description}','${el.author}','${el.content}','${el.publishedAt}','${el.url}','${el.urlToImage}')" class="card-text"><a href="#">see detail</a></p>
                     <p class="card-text"><small class="text-muted">Published at :${el.publishedAt}</small></p>
                 </div>
                 </div>
@@ -117,6 +105,48 @@ function showMain(data){
         </div>
         `)
     })
+}
+function showDetail(title,description,author,content,publishedAt,url,urlToImage) {
+    event.preventDefault()
+    closeMain()
+    // en ru chinesse japanese
+    $('#detail-page').html(`
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">News Reader</a>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+            </ul>
+            <form class="form-inline my-2 my-lg-0">
+                <button onclick="logout()" type="button" class="btn btn-primary btn-sm">Sign out</button>
+            </form>
+        </div>
+    </nav>
+    <div class="container mt-5 p-4">
+        <div class="card mb-3">
+            <img src="${urlToImage}" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">${title}</h5>
+                <p class="card-text">${content}</p>
+                <p class="card-text"><small class="text-muted">Last updated at : ${publishedAt}</small></p>
+            </div>
+        </div>
+    </div>
+    <nav class="navbar navbar-expand-lg navbar-light mt-4 bg-dark" >
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="btn-group dropup">
+            <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            en
+            </button>
+            <div class="dropdown-menu">
+                <a onclick=translator() class="dropdown-item language" href="#">id</a>
+            </div>
+        </div>
+            <ul class="navbar-nav mr-auto">
+            </ul>
+        </div>
+    </nav>
+    `)
 }
 function closeLogin() {
     $('#login-page').hide()
@@ -129,4 +159,7 @@ function closeSearch() {
 }
 function closeMain() {
     $('#main-page').empty()
+}
+function closeDetail() {
+    $('#detail-page').empty()
 }

@@ -35,6 +35,7 @@ function showPage () {
     closeSearch()
     closeRegister()
     closeMain()
+    closeDetail()
     
     page.forEach(el =>{
         if(el == 'login') {
@@ -48,6 +49,9 @@ function showPage () {
         }
         if(el == 'main'){
             showMain()
+        }
+        if(el == 'detail'){
+            showDetail()
         }
     })
     page = []
