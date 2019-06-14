@@ -76,7 +76,8 @@ function showMain(data){
     </div>
     
     `)
-    data.forEach(el =>{
+    window.newsReaderAppState.news = data
+    data.forEach((el, i) =>{
         let description ;
         if( el.description == 'undefined') {
             description = 'No description'
@@ -96,7 +97,7 @@ function showMain(data){
                 <div class="card-body">
                     <h5 class="card-title">${el.title}</h5>
                     <p class="card-text">${description}</p>
-                    <p onclick="showDetail('${el.title}','${el.description}','${el.author}','${el.content}','${el.publishedAt}','${el.url}','${el.urlToImage}')" class="card-text"><a href="#">see detail</a></p>
+                    <p onclick="showDetail(${i})" class="card-text"><a href="#">see detail</a></p>
                     <p class="card-text"><small class="text-muted">Published at :${el.publishedAt}</small></p>
                 </div>
                 </div>
@@ -105,8 +106,9 @@ function showMain(data){
         `)
     })
 }
-function showDetail(title,description,author,content,publishedAt,url,urlToImage) {
+function showDetail(i) {
     event.preventDefault()
+    let { title, description, author, content, publishedAt, url, urlToImage } = window.newsReaderAppState.news[i]
     let contentSplit = content.split('…')
     content = contentSplit[0]
     window.newsReaderAppState.content = content

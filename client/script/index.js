@@ -8,7 +8,8 @@ var page = []
 var temp ;
 window.newsReaderAppState = {
     currentAudioLang: 'en-us',
-    content: ''
+    content: '',
+    news: []
 }
 
 $(document).ready(function () {
