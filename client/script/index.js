@@ -41,6 +41,7 @@ function showPage () {
     closeRegister()
     closeMain()
     closeDetail()
+    closeDetailAfterTranslate()
     
     page.forEach(el =>{
         if(el == 'login') {

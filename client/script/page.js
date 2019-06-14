@@ -54,7 +54,7 @@ function showRegister() {
 function showMain(data){
     $('#main-page').html(`
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">News Reader</a>
+        <a onclick="initial()" class="navbar-brand" href="#">News Reader</a>
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
@@ -122,7 +122,7 @@ function showDetail(i) {
         lang = data.lang
         $('#detail-page').html(`
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                <a class="navbar-brand" href="#">News Reader</a>
+                <a onclick="initial()" class="navbar-brand" href="#">News Reader</a>
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav mr-auto">
@@ -171,16 +171,13 @@ function showDetail(i) {
 function showDetailAfterTranslate(title, content, author, publishedAt, urlToImage, url, idx, toLang) {
     event.preventDefault()
     closeDetail()
-    console.log('title ===',title)
-    console.log('content ===',content)
-    console.log('author',author)
     var lang ;
     getLanguage(title)
     .then(({ data }) =>{
         lang = toLang
         $('#detail-page-after-translate').html(`
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                <a class="navbar-brand" href="#">News Reader</a>
+                <a onclick="initial()" class="navbar-brand" href="#">News Reader</a>
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav mr-auto">
