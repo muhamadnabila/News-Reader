@@ -1,7 +1,6 @@
-function playSpeech() {
+function playSpeech(text, lang = 'en-us') {
     if (!audio) {
-        let text = $('#text-to-speech-input').val()
-        Axios.post(`/textToSpeech`, {text})
+        Axios.post(`/textToSpeech`, {text, lang})
             .then(res => {
                 audio = res.data.speech
                 //set audio source
@@ -9,7 +8,6 @@ function playSpeech() {
             })
             .catch((err) => {
                 console.log(err)
-                debugger
                 alert('audio api error')
             })
     }
