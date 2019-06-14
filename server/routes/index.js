@@ -32,11 +32,15 @@ route.post('/translate',(req, res, next)=> {
     let text = req.body.text
     let fromLang = req.body.fromLang 
     let toLang = req.body.toLang
-    Axios.post(`https://translate.yandex.net/api/v1.5/tr.json/translate?lang=${fromLang}-${toLang}&format=html&key=${process.env.YANDEX_API_KEY}&text=${ text }`)
+    let uri = encodeURI(`https://translate.yandex.net/api/v1.5/tr.json/translate?lang=${fromLang}-${toLang}&format=html&key=${process.env.YANDEX_API_KEY}&text=${text}`)
+    Axios.get(uri)
     .then(({ data }) =>{
         res.status(200).json(data)
     })
-    .catch(next)
+    .catch((err) => {
+        console.log(err)
+        next(err)
+    })
 })
 route.use('/*', (req, res) => res.status(404).json({error: 'Not Found :('}))
 
