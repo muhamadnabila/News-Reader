@@ -152,6 +152,7 @@ function showDetail(title,description,author,content,publishedAt,url,urlToImage)
                         <a onclick="translator('${lang}','zh','${title}','${content}','${author}','${publishedAt}','${urlToImage}','${url}')" class="dropdown-item " href="#">zh</a>
                         <a onclick="translator('${lang}','ja','${title}','${content}','${author}','${publishedAt}','${urlToImage}','${url}')" class="dropdown-item " href="#">ja</a>
                     </div>
+                &nbsp;<audio id="audio-source" controls preload="none" id="text-to-speech-audio"></audio>
                 </div>
                     <ul class="navbar-nav mr-auto">
                     </ul>
@@ -199,18 +200,18 @@ function showDetailAfterTranslate(title,content,author,publishedAt,urlToImage,ur
             </div>
             <nav class="navbar navbar-expand-lg navbar-light mt-4 bg-dark" >
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <div class="btn-group dropup">
-                    <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    ${lang}
-                    </button>
-                    <div class="dropdown-menu">
-                        <a onclick="translator('${lang}','en','${title}','${content}','${author}','${publishedAt}','${urlToImage}','${url}')" class="dropdown-item " href="#">en</a>
-                        <a onclick="translator('${lang}','ru','${title}','${content}','${author}','${publishedAt}','${urlToImage}','${url}')" class="dropdown-item " href="#">ru</a>
-                        <a onclick="translator('${lang}','zh','${title}','${content}','${author}','${publishedAt}','${urlToImage}','${url}')" class="dropdown-item " href="#">zh</a>
-                        <a onclick="translator('${lang}','ja','${title}','${content}','${author}','${publishedAt}','${urlToImage}','${url}')" class="dropdown-item " href="#">ja</a>
+                    <div class="btn-group dropup">
+                        <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        ${lang}
+                        </button>
+                        <div class="dropdown-menu">
+                            <a onclick="translator('${lang}','en','${title}','${content}','${author}','${publishedAt}','${urlToImage}','${url}')" class="dropdown-item " href="#">en</a>
+                            <a onclick="translator('${lang}','ru','${title}','${content}','${author}','${publishedAt}','${urlToImage}','${url}')" class="dropdown-item " href="#">ru</a>
+                            <a onclick="translator('${lang}','zh','${title}','${content}','${author}','${publishedAt}','${urlToImage}','${url}')" class="dropdown-item " href="#">zh</a>
+                            <a onclick="translator('${lang}','ja','${title}','${content}','${author}','${publishedAt}','${urlToImage}','${url}')" class="dropdown-item " href="#">ja</a>
+                        </div>
                     </div>
                     &nbsp;<audio id="audio-source" controls preload="none" id="text-to-speech-audio"></audio>
-                </div>
                     <ul class="navbar-nav mr-auto">
                     </ul>
                 </div>
