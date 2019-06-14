@@ -83,25 +83,31 @@ function logout() {
     });
     initial()
 }
-
-function translator() {
+function getLanguage(title) {
     event.preventDefault()
-    console.log(temp)
-    let fromLang = 'en'
-    let toLang = $('.language').text()
-    let title =  ''
-    let description = ''
-    for (let i = 0 ; i < temp.length; i++) {
-        title += temp[i].title + '##'
-        description += temp[i].description + '##'
-    }
-    let text = title 
-    console.log(text)
-    Axios.post('/translate' , { text, fromLang, toLang })
-    .then(data =>{
-        console.log(data)
+    return new Promise((res,rej)=>{
+        Axios.get(`/translate/${title}`)
+        .then(data =>{
+            res(data)
+        })
+        .catch(err =>{
+            rej(err)
+        })
+
+    })
+}
+
+function translator(fromLang,toLang,title,content,author,publishedAt,urlToImage,url) {
+    event.preventDefault()
+    let titleTranslate = Axios.post('/translate' , { text : title, fromLang, toLang })
+    let descriptionTranslate = Axios.post('/translate' , { text : content, fromLang, toLang })
+    Promise.all([ titleTranslate, descriptionTranslate ])
+    .then(value =>{
+        (value[0].data,value[1].data,author,publishedAt,urlToImage,url)
+        showDetailAfterTranslate(value[0].data,value[1].data,author,publishedAt,urlToImage,url)
     })
     .catch(err =>{
-        console.log(err)
+        rej(err)
     })
+
 }

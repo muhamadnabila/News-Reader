@@ -86,7 +86,6 @@ function showMain(data){
         }else {
             description = el.description
         }
-        console.log(el)
         $('#list-news').append(`
         <div class="card mb-3" style="width: 100%; height:200px; max-height:200px">
             <div class="row no-gutters">
@@ -109,44 +108,111 @@ function showMain(data){
 function showDetail(title,description,author,content,publishedAt,url,urlToImage) {
     event.preventDefault()
     closeMain()
-    // en ru chinesse japanese
-    $('#detail-page').html(`
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">News Reader</a>
+    var lang ;
+    getLanguage(title)
+    .then(({ data }) =>{
+        lang = data.lang
+        $('#detail-page').html(`
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <a class="navbar-brand" href="#">News Reader</a>
 
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-            </ul>
-            <form class="form-inline my-2 my-lg-0">
-                <button onclick="logout()" type="button" class="btn btn-primary btn-sm">Sign out</button>
-            </form>
-        </div>
-    </nav>
-    <div class="container mt-5 p-4">
-        <div class="card mb-3">
-            <img src="${urlToImage}" class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">${title}</h5>
-                <p class="card-text">${content}</p>
-                <p class="card-text"><small class="text-muted">Last updated at : ${publishedAt}</small></p>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto">
+                    </ul>
+                    <form class="form-inline my-2 my-lg-0">
+                        <button onclick="logout()" type="button" class="btn btn-primary btn-sm">Sign out</button>
+                    </form>
+                </div>
+            </nav>
+            <div class="container mt-5 p-4">
+                <div class="card mb-3">
+                    <img src="${urlToImage}" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">${title}</h5>
+                        <p class="card-text">${content}</p>
+                        <p class="card-text"><small class="text-muted">Last updated at : ${publishedAt}</small></p>
+                    </div>
+                </div>
             </div>
-        </div>
-    </div>
-    <nav class="navbar navbar-expand-lg navbar-light mt-4 bg-dark" >
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <div class="btn-group dropup">
-            <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            en
-            </button>
-            <div class="dropdown-menu">
-                <a onclick=translator() class="dropdown-item language" href="#">id</a>
+            <nav class="navbar navbar-expand-lg navbar-light mt-4 bg-dark" >
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <div class="btn-group dropup">
+                    <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    ${lang}
+                    </button>
+                    <div class="dropdown-menu">
+                        <a onclick="translator('${lang}','en','${title}','${content}','${author}','${publishedAt}','${urlToImage}','${url}')" class="dropdown-item " href="#">en</a>
+                        <a onclick="translator('${lang}','ru','${title}','${content}','${author}','${publishedAt}','${urlToImage}','${url}')" class="dropdown-item " href="#">ru</a>
+                        <a onclick="translator('${lang}','zh','${title}','${content}','${author}','${publishedAt}','${urlToImage}','${url}')" class="dropdown-item " href="#">zh</a>
+                        <a onclick="translator('${lang}','ja','${title}','${content}','${author}','${publishedAt}','${urlToImage}','${url}')" class="dropdown-item " href="#">ja</a>
+                    </div>
+                </div>
+                    <ul class="navbar-nav mr-auto">
+                    </ul>
+                </div>
+            </nav>
+            `)
+    })
+    .catch(err =>{
+        console.log(err)
+    })
+    
+}
+
+function showDetailAfterTranslate(title,content,author,publishedAt,urlToImage,url) {
+    event.preventDefault()
+    closeDetail()
+    console.log('title ===',title)
+    console.log('content ===',content)
+    console.log('author',author)
+    var lang ;
+    getLanguage(title)
+    .then(({ data }) =>{
+        lang = data.lang
+        $('#detail-page-after-translate').html(`
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <a class="navbar-brand" href="#">News Reader</a>
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto">
+                    </ul>
+                    <form class="form-inline my-2 my-lg-0">
+                        <button onclick="logout()" type="button" class="btn btn-primary btn-sm">Sign out</button>
+                    </form>
+                </div>
+            </nav>
+            <div class="container mt-5 p-4">
+                <div class="card mb-3">
+                    <img src="${urlToImage}" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 id="for-title" class="card-title">${title.text}</h5>
+                        <p class="card-text">${content.text}</p>
+                        <p class="card-text"><small class="text-muted">Last updated at : ${publishedAt}</small></p>
+                    </div>
+                </div>
             </div>
-        </div>
-            <ul class="navbar-nav mr-auto">
-            </ul>
-        </div>
-    </nav>
-    `)
+            <nav class="navbar navbar-expand-lg navbar-light mt-4 bg-dark" >
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <div class="btn-group dropup">
+                    <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    ${lang}
+                    </button>
+                    <div class="dropdown-menu">
+                        <a onclick="translator('${lang}','en','${title}','${content}','${author}','${publishedAt}','${urlToImage}','${url}')" class="dropdown-item " href="#">en</a>
+                        <a onclick="translator('${lang}','ru','${title}','${content}','${author}','${publishedAt}','${urlToImage}','${url}')" class="dropdown-item " href="#">ru</a>
+                        <a onclick="translator('${lang}','zh','${title}','${content}','${author}','${publishedAt}','${urlToImage}','${url}')" class="dropdown-item " href="#">zh</a>
+                        <a onclick="translator('${lang}','ja','${title}','${content}','${author}','${publishedAt}','${urlToImage}','${url}')" class="dropdown-item " href="#">ja</a>
+                    </div>
+                </div>
+                    <ul class="navbar-nav mr-auto">
+                    </ul>
+                </div>
+            </nav>
+            `)
+    })
+    .catch(err =>{
+        console.log(err)
+    })
 }
 function closeLogin() {
     $('#login-page').hide()
@@ -162,4 +228,7 @@ function closeMain() {
 }
 function closeDetail() {
     $('#detail-page').empty()
+}
+function closeDetailAfterTranslate() {
+    $('#detail-page-after-translate').empty()
 }
