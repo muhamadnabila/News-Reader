@@ -108,6 +108,12 @@ function showMain(data){
 }
 function showDetail(title,description,author,content,publishedAt,url,urlToImage) {
     event.preventDefault()
+    let contentSplit = content.split('…')
+    content = contentSplit[0]
+    window.newsReaderAppState.content = content
+    let audioLang = window.newsReaderAppState.currentAudioLang
+    
+    playSpeech(content, audioLang)
     closeMain()
     // en ru chinesse japanese
     $('#detail-page').html(`
@@ -141,6 +147,7 @@ function showDetail(title,description,author,content,publishedAt,url,urlToImage)
             <div class="dropdown-menu">
                 <a onclick=translator() class="dropdown-item language" href="#">id</a>
             </div>
+            &nbsp;<audio id="audio-source" controls preload="none" id="text-to-speech-audio"></audio>
         </div>
             <ul class="navbar-nav mr-auto">
             </ul>
