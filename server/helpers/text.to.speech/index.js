@@ -1,10 +1,10 @@
 const voicerss = require('./voicerss')
 
-function getSpeech(text) {
+function getSpeech(text, lang) {
     return new Promise ((resolve, reject) => {
         voicerss.speech({
             key: process.env.VOICE_RSS_API_KEY,
-            hl: 'en-us',
+            hl: lang || 'en-us',
             src: text,
             r: 0,
             c: 'mp3',

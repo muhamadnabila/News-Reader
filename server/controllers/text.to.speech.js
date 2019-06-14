@@ -2,9 +2,9 @@ const toSpeech = require('../helpers/text.to.speech')
 
 class TextToSpeech {
    static async textToSpeech(req, res, next) {
-        let {text} = req.body
+        let {text, lang} = req.body
         try  {
-            let speechBuffer = await toSpeech(text)
+            let speechBuffer = await toSpeech(text, lang)
             let speech = Buffer.from(speechBuffer, 'base64').toString('ascii')
             res.json({speech})
         } catch (err) {
