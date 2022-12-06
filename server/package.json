@@ -19,7 +19,7 @@
     "google-auth-library": "^4.2.0",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.5.15",
-    "request": "~2.72.0"
+    "request": "~2.88.2"
   },
   "devDependencies": {
     "dotenv": "^8.0.0"
